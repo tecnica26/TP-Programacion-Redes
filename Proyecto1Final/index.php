@@ -15,7 +15,7 @@ $ADMIN = false;
 $sqlAdmin = "select * from user where id = '$id'";
 $resultAdmin = $conn->query($sqlAdmin);
 while ($row = $resultAdmin->fetch_assoc()) {
-    if($row['ADMIN'] == 1) $ADMIN = 1;
+    if($row['ADMIN'] == 1) $ADMIN = true;
 }
 ?>
 
