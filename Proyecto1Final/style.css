@@ -1,0 +1,11 @@
+.bg-animated {
+    background: linear-gradient(270deg, #ba37c1, #28d5b8);
+    background-size: 400% 400%;
+    animation: bgAnimation 30s ease infinite;
+}
+
+@keyframes bgAnimation {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
