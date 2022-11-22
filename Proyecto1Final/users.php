@@ -52,7 +52,7 @@ while ($row = $resultAdmin->fetch_assoc()) {
                         <form action="update.php" method="post" class="flex border border-neutral-400 rounded-sm">
                             <div class="flex flex-col border border-neutral-300 rounded-sm px-2 py-1 hidden">
                                 <p class="text-md text-neutral-500">ID</p>
-                                <input class="text-xl text-neutral-700 focus:outline-neutral-300 cursor-pointer focus:outline w-16" name="id" type="text" disabled value="<?php echo $row['id']; ?>">
+                                <input class="text-xl text-neutral-700 focus:outline-neutral-300 cursor-pointer focus:outline w-16" name="id" type="text" value="<?php echo $row['id']; ?>">
                             </div>
                             <div class="flex flex-col border border-neutral-300 rounded-sm px-2 py-1">
                                 <p class="text-md text-neutral-500">Nombre</p>

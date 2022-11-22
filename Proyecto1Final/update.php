@@ -17,13 +17,14 @@ while ($row = $resultAdmin->fetch_assoc()) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['id'])) $id = $_POST['id'];
+	echo $_POST['id'];
+    if (isset($_POST['id'])) $prop_id = $_POST['id'];
     if (isset($_POST['username'])) $username = $_POST['username'];
     if (isset($_POST['email'])) $email = $_POST['email'];
     if (isset($_POST['tag'])) $tag = $_POST['tag'];
     if (isset($_POST['ADMIN'])) $PROP_ADMIN = $_POST['ADMIN'];
 
-    $sql = "update user set username = '$username', email = '$email', tag = '$tag', ADMIN = '$PROP_ADMIN' where id = '$id'";
+    $sql = "update user set username = '$username', email = '$email', tag = '$tag', ADMIN = '$PROP_ADMIN' where id = '$prop_id'";
     $result = $conn->query($sql);
     header("Location: users.php");
     exit;
