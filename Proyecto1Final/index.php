@@ -63,7 +63,7 @@ while ($row = $resultAdmin->fetch_assoc()) {
                             <p class="text-xl text-neut ral-700"><?php echo $row['filename']; ?></p>
                         </div>
                         <div class="flex">
-                            <a download href="<?php echo "uploads/" . $id . "/" . $row['filename']; ?>" class="px-2 w-[50%] py-1 bg-purple-500 text-center text-white text-xl font-semibold">Download</a>
+                            <a download href="<?php echo "uploads/" . $id . "/" . $row['filename']; ?>" class="px-2 w-[50%] py-1 bg-purple-500 text-center text-white text-xl font-semibold">Descargar</a>
                             <a href="<?php echo "eliminar.php?userid=" . $id . "&filename=" . $row['filename']; ?>" class="px-2 w-[50%] py-1 bg-red-500 text-center text-white text-xl font-semibold">Eliminar</a>
                         </div>
                     </div>

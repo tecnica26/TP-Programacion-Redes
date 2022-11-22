@@ -3,7 +3,7 @@
         <?php if($ADMIN == true) {?>
             <a href="index.php" class="text-xl text-neutral-700">Inicio</a>
             <a href="users.php" class="text-xl text-neutral-700">Usuarios</a>
-            <p class="text-xl text-neutral-500">ID: <?php echo $id; ?></p>
+            <!-- <p class="text-xl text-neutral-500">ID: <?php echo $id; ?></p> -->
         <?php } ?>
         <p class="text-xl text-neutral-500">Usuario: <?php echo $username; ?></p>
     </div>
