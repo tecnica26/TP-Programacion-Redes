@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-11-2022 a las 01:44:35
--- Versión del servidor: 10.4.25-MariaDB
--- Versión de PHP: 8.1.10
+-- Tiempo de generación: 22-11-2022 a las 05:17:06
+-- Versión del servidor: 10.4.22-MariaDB
+-- Versión de PHP: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `files` (
   `id` int(11) NOT NULL,
   `filename` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `userID` int(11) NOT NULL
+  `userID` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `files` (
 --
 
 INSERT INTO `files` (`id`, `filename`, `userID`) VALUES
-(5, 'index.php', 26);
+(46, 'ysy-a-silbando-prod-club-hats-ysya2020-vol-5.mp3', '3ea98edf-b38b-4ce9-9262-8878b232ac57');
 
 -- --------------------------------------------------------
 
@@ -47,7 +47,7 @@ INSERT INTO `files` (`id`, `filename`, `userID`) VALUES
 --
 
 CREATE TABLE `user` (
-  `id` int(11) NOT NULL,
+  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -60,9 +60,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `email`, `password`, `tag`, `ADMIN`) VALUES
-(25, 'Luciano', 'lucianobrumer5@gmail.com', 'asd', 'TPCk', 1),
-(26, 'Marcos', 'marcos@gmail.com', 'asd', 'MrsR', 0),
-(27, 'Pedro', 'pedro@asd', 'asd', 'WHmi', 0);
+('3ea98edf-b38b-4ce9-9262-8878b232ac57', 'Luciano', 'lucianobrumer5@gmail.com', '$2y$10$KQVrcMcKRMMar4uLwze6SumoDLSj.JzWgGlmb3w6Tbezq8MDmal6C', 'LDtk4', 1);
 
 --
 -- Índices para tablas volcadas
@@ -88,13 +86,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT de la tabla `files`
 --
 ALTER TABLE `files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT de la tabla `user`
---
-ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,8 +1,6 @@
 <?php
-
 include './utils/db.php';
-
-if (!isset($_COOKIE['session'])) header('Location: login.php');
+include './middelwares/isLogin.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_COOKIE['session'];
@@ -15,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!file_exists($target_dir)) {
         mkdir("uploads/" . $id, 0777);
-    } 
+    }
 
     move_uploaded_file($_FILES["file"]["tmp_name"], $target_file);
 

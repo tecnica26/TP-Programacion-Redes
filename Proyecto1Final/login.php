@@ -1,9 +1,9 @@
 <?php
-include './utils/db.php';
-
 if (isset($_COOKIE['session'])) {
     header('Location: index.php');
 }
+
+include './utils/db.php';
 
 if (isset($_POST['email'])) $email = $_POST['email'];
 if (isset($_POST['password'])) $password = $_POST['password'];
@@ -14,15 +14,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($result->num_rows > 0){
         while ($row = $result->fetch_assoc()) {
-            if ($password == $row['password']) {
+            if(password_verify($password, $row['password'])){
                 setcookie('session', $row['id'], time() + (86400 * 30) * 360, "/");
                 header("Location: index.php");
             } else {
-                $msg = 'Nombre de usuario o contraseña incorrectos.';
+                $msg = 'Correo electronico o contraseña incorrectos.';
             }
         }
     } else {
-        $msg = 'Nombre de usuario o contraseña incorrectos.';
+        $msg = 'Correo electronico o contraseña incorrectos.';
     }
 
     header("Location: " . $_SERVER["REQUEST_URI"] . "?msg=" . $msg);

@@ -1,10 +1,6 @@
 <?php
-if (!isset($_COOKIE['session'])) {
-    header('Location: login.php');
-    exit;
-}
-
 include './utils/db.php';
+include './middelwares/isLoginAsAdmin.php';
 
 $sql = "select * from user";
 $result = $conn->query($sql);
@@ -30,7 +26,7 @@ while ($row = $resultAdmin->fetch_assoc()) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio</title>
+    <title>Usuarios</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -53,28 +49,30 @@ while ($row = $resultAdmin->fetch_assoc()) {
 
                 <?php while ($row = $result->fetch_assoc()) {?>
                     <?php if($row['id'] == $id || $ADMIN == true) {?>
-                        <div class="flex border border-neutral-400 rounded-sm">
-                            <div class="flex flex-col border border-neutral-300 rounded-sm px-2 py-1">
+                        <form action="update.php" method="post" class="flex border border-neutral-400 rounded-sm">
+                            <div class="flex flex-col border border-neutral-300 rounded-sm px-2 py-1 hidden">
                                 <p class="text-md text-neutral-500">ID</p>
-                                <p class="text-xl text-neutral-700"><?php echo $row['id']; ?></p>
+                                <input class="text-xl text-neutral-700 focus:outline-neutral-300 cursor-pointer focus:outline w-16" name="id" type="text" disabled value="<?php echo $row['id']; ?>">
                             </div>
                             <div class="flex flex-col border border-neutral-300 rounded-sm px-2 py-1">
-                                <p class="text-md text-neutral-500">Nombre de usuario</p>
-                                <p class="text-xl text-neutral-700"><?php echo $row['username']; ?></p>
+                                <p class="text-md text-neutral-500">Nombre</p>
+                                <input class="text-xl text-neutral-700 focus:outline-neutral-300 cursor-pointer focus:outline w-20" name="username" type="text" value="<?php echo $row['username']; ?>">
                             </div>
                             <div class="flex flex-col border border-neutral-300 rounded-sm px-2 py-1">
                                 <p class="text-md text-neutral-500">Email</p>
-                                <p class="text-xl text-neutral-700"><?php echo $row['email']; ?></p>
+                                <input class="text-xl text-neutral-700 focus:outline-neutral-300 cursor-pointer focus:outline w-64" name="email" type="email" value="<?php echo $row['email']; ?>">
                             </div>
                             <div class="flex flex-col border border-neutral-300 rounded-sm px-2 py-1">
                                 <p class="text-md text-neutral-500">Tag</p>
-                                <p class="text-xl text-neutral-700">#<?php echo $row['tag']; ?></p>
+                                <input class="text-xl text-neutral-700 focus:outline-neutral-300 cursor-pointer focus:outline w-16" name="tag" type="text" value="<?php echo $row['tag']; ?>">
                             </div>
                             <div class="flex flex-col border border-neutral-300 rounded-sm px-2 py-1">
                                 <p class="text-md text-neutral-500">ADMIN</p>
-                                <p class="text-xl text-neutral-700"><?php echo $row['ADMIN']; ?></p>
+                                <input class="text-xl text-neutral-700 focus:outline-neutral-300 cursor-pointer focus:outline w-16" name="ADMIN" type="text" value="<?php echo $row['ADMIN']; ?>">
                             </div>
-                        </div>
+                            <input type="submit" class="px-3 flex items-center py-1 bg-purple-500 text-center text-white text-xl font-semibold cursor-pointer" value="Guardar">
+                            <a href="<?php echo "removeuser.php?id=" . $row['id']; ?>" class="px-3 flex items-center py-1 bg-red-500 text-center text-white text-xl font-semibold">Eliminar</a>
+                        </form>
                     <?php } ?>
                 <?php } ?>
 

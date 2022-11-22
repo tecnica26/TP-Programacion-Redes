@@ -1,4 +1,9 @@
 <?php
+if (isset($_COOKIE['session'])) {
+    header('Location: index.php');
+}
+
+include './utils/db.php';
 
 function generateRandomString($length = 4) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -10,20 +15,46 @@ function generateRandomString($length = 4) {
     return $randomString;
 }
 
-include './utils/db.php';
-
-if (isset($_COOKIE['session'])) {
-    header('Location: index.php');
-}
-
 if (isset($_POST['username'])) $username = $_POST['username'];
 if (isset($_POST['email'])) $email = $_POST['email'];
 if (isset($_POST['password'])) $password = $_POST['password'];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $tag = generateRandomString();
+function debug_to_console($data) {
+    $output = $data;
+    if (is_array($output))
+        $output = implode(',', $output);
 
-    $sql = "insert into user (username, email, password, tag) values ('$username', '$email', '$password', '$tag')";
+    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+}
+
+function gen_uuid() {
+    return sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+        // 32 bits for "time_low"
+        mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ),
+
+        // 16 bits for "time_mid"
+        mt_rand( 0, 0xffff ),
+
+        // 16 bits for "time_hi_and_version",
+        // four most significant bits holds version number 4
+        mt_rand( 0, 0x0fff ) | 0x4000,
+
+        // 16 bits, 8 bits for "clk_seq_hi_res",
+        // 8 bits for "clk_seq_low",
+        // two most significant bits holds zero and one for variant DCE1.1
+        mt_rand( 0, 0x3fff ) | 0x8000,
+
+        // 48 bits for "node"
+        mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff )
+    );
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $id = gen_uuid();
+    $tag = generateRandomString();
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT, ['cost' => 10]);
+
+    $sql = "insert into user (id, username, email, password, tag) values ('$id' ,'$username', '$email', '$hashedPassword', '$tag')";
 
     if ($conn->query($sql) === TRUE) {
         $msg = 'Usuario registrado perfectamente';
